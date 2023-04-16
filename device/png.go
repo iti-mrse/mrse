@@ -3,8 +3,8 @@ package device
 import (
 	"strconv"
     "fmt"
-    "github.com/iti-mrse/mrse/pkgs/vrtime"
-    "github.com/iti-mrse/mrse/pkgs/evtm"
+    "github.com/iti-mrse/mrse/vrtime"
+    "github.com/iti-mrse/mrse/evtm"
 )
 
 // ---------- interfaces ---------
