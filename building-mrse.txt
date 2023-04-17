@@ -1,0 +1,52 @@
+There were a lot steps (and way more experimentation) that went into
+the mrse module being published in a way that a go program can import it.
+All of the steps are described or hinted at in a variety of web pages,
+and sequencing in various ways may be inadequtely documents.
+
+0. Repository preparation
+  create an ssh key-pair, see
+ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+ and include as described locally and put the public key on the github repo
+ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+1. Module structure.  What worked:
+ a) module == github repository with a user account, same name (e.g. mrse).  
+ b) create a repo with that name, put into it at least one file template, e.g. README.md
+ c) copy the clone string for ssh, e.g. git@github.com:iti-mrse/mrse.git
+ d) create a folder (e.g. github-mrse), descend into it, and clone
+    % git clone git@github.com:iti-mrse/mrse.git
+
+  This should create a folder mrse that contains the files included from the beginning, README.md
+  N.B. git is going to remember the url used to do the clone and use that I think for all interaction with 
+  the github repo.   I'm wary of doing this within a Dropbox folder, owing to the potential for
+  version conflicts (which I've seen and could seemingly do nothing about except a clean start
+  in a non-shared directory)
+
+
+ e) A module is stored as a folder with a go.mod file that includes the github path, here,
+     'module github.com/iti-mrse/mrse'
+
+    create it doing (from within mrse)
+     % git mod init github.com/iti-mrse/mrse
+
+ f) folders that represent packages are also in the module, at the time of this writing
+     (base) M2-Macbook-Air:mrse nicol$ ls
+            LICENSE		device		evtq		go.sum		vrtime
+            README.md	evtm		go.mod		mrn
+
+ g) Each folder may have .go files (each of which in the preamble names its package as
+     the folder name, e.g.,
+        package evtm
+
+    I can't tell at this point if a package folder can contain a folder which is itself a package.
+
+ h) did the usual 'git add' to bring in all the new files. 
+
+ see   https://devconnected.com/how-to-create-git-tags/
+ i) % git tag v0.1.0
+    % git commit
+    % git push
+
+ j) I have been able to import github.com/iti-mrse/mrse/vrtime and github.com/iti-mrse/mrse/evtm
+    from an application 
+
